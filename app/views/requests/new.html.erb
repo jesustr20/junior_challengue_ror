@@ -1,0 +1,10 @@
+<div class="container d-flex flex-column justify-content-center my-4">
+  <h1 class="align-self-center">Make your request</h1>
+
+  <%= render "form" , request: @requests %>
+
+    <div class="align-self-center">
+      <%= link_to "Back to Index" , requests_path, class: "btn btn-secondary" %>
+    </div>
+
+</div>

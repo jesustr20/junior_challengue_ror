@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <%= @request.client.user.name %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= @request.product.name %></h5>
+      <p class="card-text"><%= @request.description %></p>
+      <p class="badge rounded-pill text-wrap bg-opacity-75 bg-secondary"><%= @request.state %></p>
+    </div>
+    <div class="card-footer text-muted">
+      <%= time_ago_in_words(@request.created_at) %> ago
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center gap-2 my-4">
+    <% if @request.state == "Pendent" %>
+      <%= link_to "Accept", accept_request_path(@request.id), class: "btn btn-success" %>
+      <%= button_to "Discard", dismiss_request_path(@request.id), data: {turbo_method: :delete}, class: "btn btn-danger" %>
+    <% end %>
+  </div>
+</div>

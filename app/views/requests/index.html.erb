@@ -1,0 +1,47 @@
+<div class="container my-4">
+  <h1 class="my-4">My Requests</h1>
+  <%= link_to "Solicitar reparación" , requests_new_path, class: "btn
+        btn-outline-success w-25" %>
+  <table class="table">
+    <thead>
+      <tr>
+      <th scope="col">Product</th>
+      <th scope="col">Store</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">State</th>
+      <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @requests.each do |request| %>
+        <tr>
+          <td><%= request.product.name %></td>
+          <td><%= request.store.user.name %></td>
+          <td><%= request.description.first(25)... %></td>
+          <td>$<%= request.price %></td>
+          <td>
+            <% if request.state == "Earring" %>
+              <div class="badge rounded-pill text-wrap bg-opacity-75 bg-secondary">
+                <%= request.state %>
+              </div>
+            <% elsif request.state == "Approved" %>
+              <div class="badge rounded-pill text-wrap bg-opacity-75 bg-success">
+                <%= request.state %>
+              </div>
+            <% else %>
+              <div class="badge rounded-pill text-wrap bg-opacity-75 bg-danger">
+                <%= request.state %>
+              </div>
+            <% end %>
+          </td>
+          <td>
+            <div>
+              <%= link_to "Show", request_path(request.id), class: "btn btn-outline-warning btn-sm" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

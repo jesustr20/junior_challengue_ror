@@ -1,0 +1,34 @@
+<div>
+  <%= form_with(model: request, url: requests_path) do |form| %>
+    <% if request.errors.any? %>
+      <div style="color: red">
+        <h2>
+          <%= pluralize(request.errors.count, "error" ) %> prohibited this solocitud from being saved:
+        </h2>
+
+        <ul>
+          <% request.errors.each do |error| %>
+            <li>
+              <%= error.full_message %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-outline">
+      <%= form.label "Product" , class: "form-label" %>
+        <%= form.collection_select :product_id, Product.order(:name), :id, :name, {}, { class: "form-select" }
+          %>
+    </div>
+
+    <div class="form-outline mb-2">
+      <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="my-4 text-center">
+      <%= form.submit "Realizar solicitud" , class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>
